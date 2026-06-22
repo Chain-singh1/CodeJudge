@@ -1,56 +1,3 @@
-// require('dotenv').config()
-// const express = require('express')
-// const cors    = require('cors')
-// const connectDB = require('./config/db')
-
-// // Routes
-// const authRoutes              = require('./routes/authRoutes')
-// const problemRoutes           = require('./routes/problemRoutes')
-// const submissionRoutes        = require('./routes/submissionRoutes')
-// const contestRoutes           = require('./routes/contestRoutes')
-// const contestSubmissionRoutes = require('./routes/contestSubmissionRoutes')
-// const leaderboardRoutes       = require('./routes/leaderboardRoutes')
-// const executeRoutes           = require('./routes/executeRoutes')
-// const aiRoutes                = require('./routes/aiRoutes')
-// const snippetRoutes           = require('./routes/snippetRoutes')
-
-// const app = express()
-
-// // Connect DB
-// connectDB()
-
-// // Middleware
-// app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
-// app.use(express.json())
-
-// // Health check
-// app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
-
-// // API routes
-// app.use('/api/auth',               authRoutes)
-// app.use('/api/problems',           problemRoutes)
-// app.use('/api/submissions',        submissionRoutes)
-// app.use('/api/contests',           contestRoutes)
-// app.use('/api/contest-submissions',contestSubmissionRoutes)
-// app.use('/api/leaderboard',        leaderboardRoutes)
-// app.use('/api/execute',            executeRoutes)
-// app.use('/api/ai',                 aiRoutes)
-// app.use('/api/snippets',            snippetRoutes)
-// // 404 handler
-// app.use((req, res) => res.status(404).json({ message: `Route ${req.originalUrl} not found` }))
-
-// // Global error handler
-// app.use((err, req, res, next) => {
-//   console.error(err.stack)
-//   res.status(500).json({ message: 'Internal server error' })
-// })
-
-// const PORT = process.env.PORT || 5000
-// app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`))
-
-
-
-
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -67,6 +14,7 @@ const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const executeRoutes = require('./routes/executeRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const snippetRoutes = require('./routes/snippetRoutes');
+const mongoSanitize = require('express-mongo-sanitize')
 
 const app = express();
 connectDB();
@@ -91,6 +39,7 @@ app.use(cors({
 // ── Body size limits — prevents huge payload attacks
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: true, limit: '100kb' }));
+app.use(mongoSanitize());
 
 // ── Global rate limit — 200 req/15min per IP
 const globalLimiter = rateLimit({
