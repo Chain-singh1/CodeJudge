@@ -4,7 +4,7 @@ const path = require("path");
 const os = require("os");
 const Problem = require("../models/Problem");
 
-const TIMEOUT_MS = 10000;
+const TIMEOUT_MS = 30000;
 const MAX_CODE_LEN = 50000; // 50KB max code
 const MAX_OUT_LEN = 100000; // 100KB max output
 const IS_WINDOWS = process.platform === "win32";
