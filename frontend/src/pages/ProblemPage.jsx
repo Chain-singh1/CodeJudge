@@ -756,13 +756,16 @@ const ProblemPage = () => {
         className="flex items-center gap-1.5 bg-[#1a1d27] hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed border border-gray-700 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm text-gray-300 font-medium transition-colors"
       >
         {isRunning ? (
-          <>
-            <span className="w-3 h-3 border border-gray-400 border-t-transparent rounded-full animate-spin" />
-            <span className="hidden sm:inline">Running...</span>
-          </>
-        ) : (
-          "▶ Run"
-        )}
+    <>
+      <span className="w-3 h-3 border border-gray-400 border-t-transparent rounded-full animate-spin" />
+      <span className="hidden sm:inline">Running...</span>
+    </>
+  ) : (
+    <>
+      <span>▶</span>
+      <span className="hidden sm:inline">Run</span>
+    </>
+  )}
       </button>
       <button
         onClick={handleSubmit}

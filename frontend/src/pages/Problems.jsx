@@ -7,45 +7,48 @@ import { useAuth } from "../context/AuthContext";
 const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
 const PAGE_SIZE = 20;
 
-const VISIBLE_TAGS = 5
+const VISIBLE_TAGS = 5;
 
 const TagFilter = ({ allTags, activeTag, onTagClick, onClear }) => {
-  const [showAll, setShowAll] = useState(false)
-  const dropdownRef = useRef(null)
+  const [showAll, setShowAll] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target))
-        setShowAll(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
+        setShowAll(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-  const visibleTags  = allTags.slice(0, VISIBLE_TAGS)
-  const hiddenTags   = allTags.slice(VISIBLE_TAGS)
-  const hasHidden    = hiddenTags.length > 0
-  const activeIsHidden = activeTag && hiddenTags.includes(activeTag)
+  const visibleTags = allTags.slice(0, VISIBLE_TAGS);
+  const hiddenTags = allTags.slice(VISIBLE_TAGS);
+  const hasHidden = hiddenTags.length > 0;
+  const activeIsHidden = activeTag && hiddenTags.includes(activeTag);
 
   const tagBtn = (tag) => (
     <button
       key={tag}
-      onClick={() => { onTagClick(tag); setShowAll(false) }}
+      onClick={() => {
+        onTagClick(tag);
+        setShowAll(false);
+      }}
       className={`text-xs px-3 py-1 rounded-full border transition-colors whitespace-nowrap ${
         activeTag === tag
-          ? 'bg-green-700 border-green-600 text-white'
-          : 'bg-[#1a1d27] border-gray-700 text-gray-400 hover:border-green-700 hover:text-green-400'
+          ? "bg-green-700 border-green-600 text-white"
+          : "bg-[#1a1d27] border-gray-700 text-gray-400 hover:border-green-700 hover:text-green-400"
       }`}
     >
       {tag}
     </button>
-  )
+  );
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-5">
       {/* Always visible tags */}
-      {visibleTags.map(tag => tagBtn(tag))}
+      {visibleTags.map((tag) => tagBtn(tag))}
 
       {/* If active tag is in hidden list, show it too so user can see what's selected */}
       {activeIsHidden && tagBtn(activeTag)}
@@ -54,32 +57,42 @@ const TagFilter = ({ allTags, activeTag, onTagClick, onClear }) => {
       {hasHidden && (
         <div className="relative" ref={dropdownRef}>
           <button
-            onClick={() => setShowAll(o => !o)}
+            onClick={() => setShowAll((o) => !o)}
             className={`text-xs px-3 py-1 rounded-full border transition-colors flex items-center gap-1 ${
               showAll || activeIsHidden
-                ? 'bg-gray-700 border-gray-600 text-white'
-                : 'bg-[#1a1d27] border-gray-700 text-gray-400 hover:border-gray-500 hover:text-gray-200'
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-[#1a1d27] border-gray-700 text-gray-400 hover:border-gray-500 hover:text-gray-200"
             }`}
           >
             +{hiddenTags.length} more
             <svg
-              className={`w-3 h-3 transition-transform ${showAll ? 'rotate-180' : ''}`}
-              fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              className={`w-3 h-3 transition-transform ${showAll ? "rotate-180" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </button>
 
           {showAll && (
             <div className="absolute left-0 top-full mt-2 z-20 bg-[#1a1d27] border border-gray-700 rounded-xl shadow-xl p-2 flex flex-wrap gap-1.5 max-w-xs sm:max-w-sm">
-              {hiddenTags.map(tag => (
+              {hiddenTags.map((tag) => (
                 <button
                   key={tag}
-                  onClick={() => { onTagClick(tag); setShowAll(false) }}
+                  onClick={() => {
+                    onTagClick(tag);
+                    setShowAll(false);
+                  }}
                   className={`text-xs px-3 py-1 rounded-full border transition-colors whitespace-nowrap ${
                     activeTag === tag
-                      ? 'bg-green-700 border-green-600 text-white'
-                      : 'bg-[#0f1117] border-gray-700 text-gray-400 hover:border-green-700 hover:text-green-400'
+                      ? "bg-green-700 border-green-600 text-white"
+                      : "bg-[#0f1117] border-gray-700 text-gray-400 hover:border-green-700 hover:text-green-400"
                   }`}
                 >
                   {tag}
@@ -100,8 +113,8 @@ const TagFilter = ({ allTags, activeTag, onTagClick, onClear }) => {
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
 const diffStyle = {
   Easy: "text-green-400 bg-green-950",
