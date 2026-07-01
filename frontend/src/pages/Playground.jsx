@@ -382,13 +382,13 @@ const Playground = () => {
           )}
           <div
             className={`
-  flex-col bg-[#0d0f18] border-r border-gray-800
-  md:relative md:flex md:flex-shrink-0
-  fixed top-12 left-0 bottom-0 z-40
-  md:top-0 md:bottom-auto md:h-full
-  transition-all duration-200
-  ${sidebarOpen ? "flex w-72 md:w-64" : "hidden md:hidden"}
-`}
+              flex-col bg-[#0d0f18] border-r border-gray-800
+              md:relative md:flex md:flex-shrink-0
+              fixed top-12 left-0 bottom-0 z-40
+              md:top-0 md:bottom-auto md:h-full
+              transition-all duration-200
+              ${sidebarOpen ? "flex w-72 md:w-64" : "hidden md:hidden"}
+            `}
           >
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800 flex-shrink-0">
               <span className="text-sm font-semibold text-gray-200">

@@ -1,19 +1,19 @@
-import Editor from '@monaco-editor/react'
+import Editor from "@monaco-editor/react";
 
 const MONACO_LANG = {
-  javascript: 'javascript',
-  python: 'python',
-  java: 'java',
-  cpp: 'cpp',
-}
+  javascript: "javascript",
+  python: "python",
+  java: "java",
+  cpp: "cpp",
+};
 
 const CodeEditor = ({ language, code, onChange }) => {
   return (
     <Editor
       height="100%"
-      language={MONACO_LANG[language] || 'javascript'}
+      language={MONACO_LANG[language] || "javascript"}
       value={code}
-      onChange={(val) => onChange(val || '')}
+      onChange={(val) => onChange(val || "")}
       theme="vs-dark"
       options={{
         fontSize: 14,
@@ -21,13 +21,13 @@ const CodeEditor = ({ language, code, onChange }) => {
         fontLigatures: true,
         minimap: { enabled: false },
         scrollBeyondLastLine: false,
-        wordWrap: 'on',
+        wordWrap: "on",
         automaticLayout: true,
         tabSize: 2,
-        lineNumbers: 'on',
-        renderLineHighlight: 'line',
+        lineNumbers: "on",
+        renderLineHighlight: "line",
         padding: { top: 12, bottom: 12 },
-        cursorBlinking: 'smooth',
+        cursorBlinking: "smooth",
         smoothScrolling: true,
         contextmenu: false,
         scrollbar: {
@@ -36,7 +36,7 @@ const CodeEditor = ({ language, code, onChange }) => {
         },
       }}
     />
-  )
-}
+  );
+};
 
-export default CodeEditor
+export default CodeEditor;

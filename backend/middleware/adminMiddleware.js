@@ -1,8 +1,8 @@
 const adminOnly = (req, res, next) => {
-  if (req.user?.role !== 'admin') {
-    return res.status(403).json({ message: 'Admin access required' })
+  if (req.user?.role !== "admin") {
+    return res.status(403).json({ message: "Admin access required" });
   }
-  next()
-}
+  next();
+};
 
-module.exports = { adminOnly }
+module.exports = { adminOnly };
